@@ -1,5 +1,4 @@
 import {
-  Button,
   Container,
   Form,
   InputContainer,
@@ -8,6 +7,7 @@ import {
   Tittle,
 } from './styles'
 import Logo from '../../assets/Logo.svg'
+import { Button } from '../../components/Button'
 
 export function Login() {
   return (
@@ -26,20 +26,26 @@ export function Login() {
 
         <Form>
           <InputContainer>
-            <label>Email</label>
-            <input type="email" />
+            <label>
+              Email
+              <input type="email" />
+            </label>
           </InputContainer>
 
           <InputContainer>
-            <label>Senha</label>
-            <input type="password" />
+            <label>
+              Senha
+              <input type="password" />
+            </label>
           </InputContainer>
 
           <Button>Entrar</Button>
         </Form>
 
         <p>
-          Não possui conta? <a>Clique aqui.</a>
+          Não possui conta?
+          {/* biome-ignore lint/a11y/useValidAnchor: <explanation> */}
+          <a> Clique aqui.</a>
         </p>
       </RightContainer>
     </Container>
