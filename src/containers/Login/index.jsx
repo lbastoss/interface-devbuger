@@ -16,8 +16,14 @@ import { Button } from '../../components/Button'
 export function Login() {
   const schema = yup
     .object({
-      email: yup.string().email().required(),
-      password: yup.string().min(6).required(),
+      email: yup
+        .string()
+        .email('Digite um e-mail valido')
+        .required('O email é obrigatorio'),
+      password: yup
+        .string()
+        .min(6, 'A senha deve ter pelo menos 6 caracteres')
+        .required('Digite uma senha'),
     })
     .required()
 
@@ -28,6 +34,8 @@ export function Login() {
   } = useForm({
     resolver: yupResolver(schema),
   })
+
+  console.log(errors)
   const onSubmit = (data) => console.log(data)
 
   return (
@@ -49,6 +57,7 @@ export function Login() {
             <label>
               Email
               <input type="email" {...register('email')} />
+              <p>{errors?.email?.message}</p>
             </label>
           </InputContainer>
 
@@ -56,6 +65,7 @@ export function Login() {
             <label>
               Senha
               <input type="password" {...register('password')} />
+              <p>{errors?.password?.message}</p>
             </label>
           </InputContainer>
 
