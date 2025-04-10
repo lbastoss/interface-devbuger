@@ -24,7 +24,7 @@ export const LeftContainer = styled.div`
     justify-content: center;
 
     img {
-        width: 80%;
+        width: 55%;
     }
 
    
@@ -42,7 +42,8 @@ export const RightContainer = styled.div`
     max-width: 50%;
 
     background: url('${Background}');
-    background-color:#2c2c2c;
+    background-size: cover;
+    background-color:#1e1e1e;
 
     p {
 
