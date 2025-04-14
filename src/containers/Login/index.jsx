@@ -1,10 +1,10 @@
-import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
-import { toast } from 'react-toastify'
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { toast } from 'react-toastify';
 
-import { api } from '../../services/api'
+import { api } from '../../services/api';
 import {
   Container,
   Form,
@@ -13,12 +13,12 @@ import {
   RightContainer,
   Tittle,
   Link,
-} from './styles'
-import Logo from '../../assets/Logo.svg'
-import { Button } from '../../components/Button'
+} from './styles';
+import Logo from '../../assets/Logo.svg';
+import { Button } from '../../components/Button';
 
 export function Login() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const schema = yup
     .object({
       email: yup
@@ -30,7 +30,7 @@ export function Login() {
         .min(6, 'A senha deve ter pelo menos 6 caracteres')
         .required('Digite uma senha'),
     })
-    .required()
+    .required();
 
   const {
     register,
@@ -38,9 +38,9 @@ export function Login() {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
-  })
+  });
 
-  console.log(errors)
+  console.log(errors);
 
   const onSubmit = async (data) => {
     try {
@@ -57,21 +57,21 @@ export function Login() {
           success: {
             render() {
               setTimeout(() => {
-                navigate('/')
-              }, 2000)
+                navigate('/');
+              }, 2000);
 
-              return 'Seja Bem-vindo(a) 👌'
+              return 'Seja Bem-vindo(a) 👌';
             },
           },
           error: 'Email ou senha incorretos 🤯',
         },
-      )
-      localStorage.setItem('token', token)
+      );
+      localStorage.setItem('token', token);
     } catch (error) {
-      console.error('Erro ao fazer login:', error)
-      toast.error('😯 Falha no sistema! Tente novamente mais tarde.')
+      console.error('Erro ao fazer login:', error);
+      toast.error('😯 Falha no sistema! Tente novamente mais tarde.');
     }
-  }
+  };
 
   return (
     <Container>
@@ -113,5 +113,5 @@ export function Login() {
         </p>
       </RightContainer>
     </Container>
-  )
+  );
 }

@@ -1,5 +1,6 @@
-import { CategoriesCarousel } from '../../components/CategoriesCarousel'
-import { Banner, Content, Container } from './styles'
+import { CategoriesCarousel } from '../../components/CategoriesCarousel';
+import { OffersCarousel } from '../../components/OffersCarousel';
+import { Banner, Content, Container } from './styles';
 
 export function Home() {
   return (
@@ -10,9 +11,9 @@ export function Home() {
       <Container>
         <Content>
           <CategoriesCarousel />
-          <div>Carrossel Produtos</div>
+          <OffersCarousel />
         </Content>
       </Container>
     </main>
-  )
+  );
 }

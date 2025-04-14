@@ -1,10 +1,10 @@
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
-import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
-import { api } from '../../services/api'
+import { api } from '../../services/api';
 import {
   Container,
   Form,
@@ -13,12 +13,12 @@ import {
   RightContainer,
   Tittle,
   Link,
-} from './styles'
-import Logo from '../../assets/logo.svg'
-import { Button } from '../../components/Button'
+} from './styles';
+import Logo from '../../assets/logo.svg';
+import { Button } from '../../components/Button';
 
 export function Register() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const schema = yup
     .object({
       name: yup.string().required('O nome é obrigatório'),
@@ -35,7 +35,7 @@ export function Register() {
         .oneOf([yup.ref('password')], 'As senhas devem ser iguais')
         .required('Confirme sua senha'),
     })
-    .required()
+    .required();
 
   const {
     register,
@@ -43,9 +43,9 @@ export function Register() {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
-  })
+  });
 
-  console.log(errors)
+  console.log(errors);
 
   const onSubmit = async (data) => {
     try {
@@ -59,29 +59,29 @@ export function Register() {
         {
           validateStatus: () => true,
         },
-      )
+      );
 
       if (status === 200 || status === 201) {
         setTimeout(() => {
-          navigate('/login')
-        }, 2000)
-        toast.success('😊 Conta criada com sucesso!')
+          navigate('/login');
+        }, 2000);
+        toast.success('😊 Conta criada com sucesso!');
       } else if (status === 400) {
         toast.error(
           '❌ Erro nos dados! Verifique as informações e tente novamente.',
-        )
+        );
       } else if (status === 409) {
-        toast.error('🫣 Email já cadastrado! Redirecionando para o login...')
+        toast.error('🫣 Email já cadastrado! Redirecionando para o login...');
         setTimeout(() => {
-          navigate('/login')
-        }, 2000)
+          navigate('/login');
+        }, 2000);
       } else {
-        throw new Error()
+        throw new Error();
       }
     } catch (error) {
-      toast.error('😯 Falha no sistema! Tente novamente')
+      toast.error('😯 Falha no sistema! Tente novamente');
     }
-  }
+  };
   return (
     <Container>
       <LeftContainer>
@@ -128,5 +128,5 @@ export function Register() {
         </p>
       </RightContainer>
     </Container>
-  )
+  );
 }

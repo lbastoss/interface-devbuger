@@ -1,15 +1,15 @@
-import styled from 'styled-components'
-import BackgroundLogin from '../../assets/background-login.svg'
-import Background from '../../assets/background.svg'
+import styled from 'styled-components';
+import BackgroundLogin from '../../assets/background-login.svg';
+import Background from '../../assets/background.svg';
 
-import { Link as ReactLink } from 'react-router-dom'
+import { Link as ReactLink } from 'react-router-dom';
 
 export const Container = styled.div`
  display: flex;
  height: 100vh;
  width: 100vw;
  
-`
+`;
 export const LeftContainer = styled.div`
 
     background: url('${BackgroundLogin}');
@@ -28,7 +28,7 @@ export const LeftContainer = styled.div`
     }
 
    
-`
+`;
 
 export const RightContainer = styled.div`
 
@@ -56,7 +56,7 @@ export const RightContainer = styled.div`
 
 }
    
-`
+`;
 export const Tittle = styled.h2`
     font-family: "Road Rage", serif;
     font-size: 40px;
@@ -64,7 +64,7 @@ export const Tittle = styled.h2`
     
 
    
-  `
+  `;
 
 export const Form = styled.form`
     display: flex;
@@ -74,7 +74,7 @@ export const Form = styled.form`
     width: 100%;
     max-width: 400px;
 
-`
+`;
 
 export const InputContainer = styled.div`
     display: flex;
@@ -103,8 +103,8 @@ export const InputContainer = styled.div`
         height: 10px;
     }
 
-`
+`;
 export const Link = styled(ReactLink)`
         text-decoration: none;
         color: #fff;
-`
+`;
