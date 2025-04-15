@@ -35,6 +35,7 @@ export const ContainerItems = styled.div`
     background-position: center;
     background-size: cover;
     border-radius: 20px;
+    cursor: grab;
 
     display: flex;
     align-items: center;

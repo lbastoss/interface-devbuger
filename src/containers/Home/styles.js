@@ -26,8 +26,3 @@ background: linear-gradient(
     rgba(255,255,255, 0.5)
 ), url('${Background}');
 `;
-
-export const Content = styled.div`
-    padding-bottom: 70px;
-
-`;
