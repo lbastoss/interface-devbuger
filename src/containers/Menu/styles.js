@@ -64,6 +64,7 @@ export const CategoryButton = styled(Link)`
     line-height: 20px;
     border: none;
     border-bottom: ${(props) => props.$isActiveCategory && '3px solid #9758a6'};
+    display: inline-flex;
 
 `;
 
@@ -76,4 +77,26 @@ export const ProductsContainer = styled.div`
     max-width: 1280px;
     margin: 50px auto 0;
 
+`;
+
+export const ContainerButton = styled.button`
+    background: transparent;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 5px;
+    
+
+  
+
+    &:hover {
+        background-color: #6f357c;
+    }
+
+
+`;
+
+export const StyledImage = styled.img`
+    width: 35px;
+   
 `;

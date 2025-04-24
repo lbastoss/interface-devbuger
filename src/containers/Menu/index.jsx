@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import ImgHome from '../../assets/buttonhome.png';
 import { CardProduct } from '../../components/CardProduct';
 import { api } from '../../services/api';
 import { formatPrice } from '../../utils/formatPrice';
@@ -10,7 +11,9 @@ import {
   CategoryMenu,
   ProductsContainer,
   CategoryButton,
+  StyledImage,
 } from './styles';
+import { ContainerButton } from './styles';
 
 export function Menu() {
   const [categories, setCategories] = useState([]);
@@ -101,6 +104,14 @@ export function Menu() {
             {category.name}
           </CategoryButton>
         ))}
+
+        <ContainerButton
+          onClick={() => {
+            navigate('/');
+          }}
+        >
+          <StyledImage src={ImgHome} alt="logoretorno" />
+        </ContainerButton>
       </CategoryMenu>
 
       <ProductsContainer>
