@@ -1,8 +1,10 @@
 import { CategoriesCarousel } from '../../components/CategoriesCarousel';
 import { OffersCarousel } from '../../components/OffersCarousel';
+import { UseUser } from '../../hooks/UserContext';
 import { Banner, Container } from './styles';
 
 export function Home() {
+  console.log(UseUser());
   return (
     <main>
       <Banner>
