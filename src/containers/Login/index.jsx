@@ -16,9 +16,12 @@ import {
 } from './styles';
 import Logo from '../../assets/Logo.svg';
 import { Button } from '../../components/Button';
+import { UseUser } from '../../hooks/UserContext';
 
 export function Login() {
   const navigate = useNavigate();
+  const { putUserData } = UseUser();
+
   const schema = yup
     .object({
       email: yup
@@ -44,9 +47,7 @@ export function Login() {
 
   const onSubmit = async (data) => {
     try {
-      const {
-        data: { token },
-      } = await toast.promise(
+      const { data: userData } = await toast.promise(
         api.post('/session', {
           email: data.email,
           password: data.password,
@@ -66,7 +67,8 @@ export function Login() {
           error: 'Email ou senha incorretos 🤯',
         },
       );
-      localStorage.setItem('token', token);
+
+      putUserData(userData);
     } catch (error) {
       console.error('Erro ao fazer login:', error);
       toast.error('😯 Falha no sistema! Tente novamente mais tarde.');
