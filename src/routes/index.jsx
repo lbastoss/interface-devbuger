@@ -5,28 +5,35 @@ import { Login } from '../containers/Login';
 import { Menu } from '../containers/Menu';
 import { Register } from '../containers/Register';
 import { Header } from '../components/Header';
+import { Footer } from '../components/Footer';
 
 export const router = createBrowserRouter([
-  {
-    path: '/',
-    element: (
-      <>
-        <Header />
-        <Home />
-      </>
-    ),
-  },
-  {
-    path: '/login',
-    element: <Login />,
-  },
-  {
-    path: '/cadastro',
-    element: <Register />,
-  },
+	{
+		path: '/',
+		element: (
+			<>
+				<Header />
+				<Home />
+				<Footer />
+			</>
+		),
+	},
+	{
+		path: '/login',
+		element: <Login />,
+	},
+	{
+		path: '/cadastro',
+		element: <Register />,
+	},
 
-  {
-    path: '/cardapio',
-    element: <Menu />,
-  },
+	{
+		path: '/cardapio',
+		element: (
+			<>
+				<Header />
+				<Menu />
+			</>
+		),
+	},
 ]);
