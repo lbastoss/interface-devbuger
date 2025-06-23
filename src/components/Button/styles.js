@@ -8,6 +8,7 @@ export const ContainerButton = styled.button`
     font-family: "Road Rage", serif;
     font-size: 30px;
     color: #fff;
+    border: none;
 
 
     &:hover {

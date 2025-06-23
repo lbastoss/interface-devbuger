@@ -5,4 +5,7 @@ export * from './CategoriesCarousel';
 export * from './Footer';
 export * from './Header';
 export * from './OffersCarousel';
+export * from './Button';
 export * from './Table';
+export * from './CartResume';
+export * from './CartItems';
