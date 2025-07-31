@@ -7,7 +7,7 @@ import { router } from './routes';
 import GlobalStyles from './styles/globalStyles';
 import AppProvider from './hooks';
 import { Elements } from '@stripe/react-stripe-js';
-import stripePromisse from './config/stripe.Config';
+import stripePromisse from './config/stripeConfig';
 
 createRoot(document.getElementById('root')).render(
 	<StrictMode>
