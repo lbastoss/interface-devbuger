@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export const Container = styled.div`
     width: 100%;
     min-height: 100vh;
-    background-color: #f0f0f0;
+    background-color: ${(props) => props.theme.secondWhite};
 
     background: linear-gradient(
     rgba(255,255,255, 0.5),
@@ -23,7 +23,7 @@ export const Banner = styled.div`
     position: relative;
 
     background: url('${BannerHamburger}') no-repeat;
-    background-color: #1f1f1f;
+    background-color: ${(props) => props.theme.mainBlack};
     background-position: center;
     background-size: cover;
 
@@ -32,7 +32,7 @@ export const Banner = styled.div`
         font-size: 80px;
         line-height: 65px;
         position: absolute;
-        color: #fff;
+        color: ${(props) => props.theme.white};
 
         right: 20%;
         top: 30%;
@@ -40,7 +40,7 @@ export const Banner = styled.div`
 
     span {
         display: block;
-        color: #fff;
+        color: ${(props) => props.theme.white};
         font-size: 20px;
     }
 
@@ -57,13 +57,13 @@ export const CategoryButton = styled(Link)`
     text-decoration: none;
     cursor: pointer;
     background: none;
-    color: ${(props) => (props.$isActiveCategory ? '#9758a6' : '#000')};
+    color: ${(props) => (props.$isActiveCategory ? (props) => props.theme.purple : '#000')};
     font-size: 24px;
     font-weight: bold;
     padding-bottom: 5px;
     line-height: 20px;
     border: none;
-    border-bottom: ${(props) => props.$isActiveCategory && '3px solid #9758a6'};
+    border-bottom: ${(props) => props.$isActiveCategory && `3px solid ${props.theme.purple}`};
     display: flex;
     
 
@@ -81,7 +81,7 @@ export const ProductsContainer = styled.div`
 `;
 
 export const ContainerButton = styled.button`
-    background: #9758a6;
+    background: ${(props) => props.theme.purple};
     width: 42px;
     height: 42px;
     border: none;
@@ -92,7 +92,7 @@ export const ContainerButton = styled.button`
     transform: translateX(140px);
 
   &:hover {
-    background-color: #6f357c;
+    background-color: ${(props) => props.theme.secondDarkPurple};
     
   }
 `;
