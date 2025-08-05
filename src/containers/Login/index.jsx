@@ -6,114 +6,118 @@ import { toast } from 'react-toastify';
 
 import { api } from '../../services/api';
 import {
-  Container,
-  Form,
-  InputContainer,
-  LeftContainer,
-  RightContainer,
-  Tittle,
-  Link,
+	Container,
+	Form,
+	InputContainer,
+	LeftContainer,
+	RightContainer,
+	Tittle,
+	Link,
 } from './styles';
 import Logo from '../../assets/Logo.svg';
 import { Button } from '../../components/Button';
 import { UseUser } from '../../hooks/UserContext';
 
 export function Login() {
-  const navigate = useNavigate();
-  const { putUserData } = UseUser();
+	const navigate = useNavigate();
+	const { putUserData } = UseUser();
 
-  const schema = yup
-    .object({
-      email: yup
-        .string()
-        .email('Digite um e-mail valido')
-        .required('O email é obrigatorio'),
-      password: yup
-        .string()
-        .min(6, 'A senha deve ter pelo menos 6 caracteres')
-        .required('Digite uma senha'),
-    })
-    .required();
+	const schema = yup
+		.object({
+			email: yup
+				.string()
+				.email('Digite um e-mail valido')
+				.required('O email é obrigatorio'),
+			password: yup
+				.string()
+				.min(6, 'A senha deve ter pelo menos 6 caracteres')
+				.required('Digite uma senha'),
+		})
+		.required();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({
+		resolver: yupResolver(schema),
+	});
 
-  console.log(errors);
+	console.log(errors);
 
-  const onSubmit = async (data) => {
-    try {
-      const { data: userData } = await toast.promise(
-        api.post('/session', {
-          email: data.email,
-          password: data.password,
-        }),
+	const onSubmit = async (data) => {
+		try {
+			const { data: userData } = await toast.promise(
+				api.post('/session', {
+					email: data.email,
+					password: data.password,
+				}),
 
-        {
-          pending: 'Verificando seus dados',
-          success: {
-            render() {
-              setTimeout(() => {
-                navigate('/');
-              }, 2000);
+				{
+					pending: 'Verificando seus dados',
+					success: {
+						render() {
+							setTimeout(() => {
+								if (userData?.admin) {
+									navigate('/admin/home');
+								} else {
+									navigate('/');
+								}
+							}, 2000);
 
-              return 'Seja Bem-vindo(a) 👌';
-            },
-          },
-          error: 'Email ou senha incorretos 🤯',
-        },
-      );
+							return 'Seja Bem-vindo(a) 👌';
+						},
+					},
+					error: 'Email ou senha incorretos 🤯',
+				},
+			);
 
-      putUserData(userData);
-    } catch (error) {
-      console.error('Erro ao fazer login:', error);
-      toast.error('😯 Falha no sistema! Tente novamente mais tarde.');
-    }
-  };
+			putUserData(userData);
+		} catch (error) {
+			console.error('Erro ao fazer login:', error);
+			toast.error('😯 Falha no sistema! Tente novamente mais tarde.');
+		}
+	};
 
-  return (
-    <Container>
-      <LeftContainer>
-        <img src={Logo} alt="logo-devburger" />
-      </LeftContainer>
+	return (
+		<Container>
+			<LeftContainer>
+				<img src={Logo} alt="logo-devburger" />
+			</LeftContainer>
 
-      <RightContainer>
-        <Tittle>
-          Olá, seja bem vindo ao <span>Dev Burguer!</span>
-          <br />
-          Acesse com seu
-          <span> Login e senha.</span>
-        </Tittle>
+			<RightContainer>
+				<Tittle>
+					Olá, seja bem vindo ao <span>Dev Burguer!</span>
+					<br />
+					Acesse com seu
+					<span> Login e senha.</span>
+				</Tittle>
 
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <InputContainer>
-            <label>
-              Email
-              <input type="email" {...register('email')} />
-              <p>{errors?.email?.message}</p>
-            </label>
-          </InputContainer>
+				<Form onSubmit={handleSubmit(onSubmit)}>
+					<InputContainer>
+						<label>
+							Email
+							<input type="email" {...register('email')} />
+							<p>{errors?.email?.message}</p>
+						</label>
+					</InputContainer>
 
-          <InputContainer>
-            <label>
-              Senha
-              <input type="password" {...register('password')} />
-              <p>{errors?.password?.message}</p>
-            </label>
-          </InputContainer>
+					<InputContainer>
+						<label>
+							Senha
+							<input type="password" {...register('password')} />
+							<p>{errors?.password?.message}</p>
+						</label>
+					</InputContainer>
 
-          <Button type="submit">Entrar</Button>
-        </Form>
+					<Button type="submit">Entrar</Button>
+				</Form>
 
-        <p>
-          Não possui conta?
-          <Link to="/cadastro"> Clique aqui.</Link>
-        </p>
-      </RightContainer>
-    </Container>
-  );
+				<p>
+					Não possui conta?
+					<Link to="/cadastro"> Clique aqui.</Link>
+				</p>
+			</RightContainer>
+		</Container>
+	);
 }
