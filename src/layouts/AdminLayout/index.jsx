@@ -1,6 +1,6 @@
 import { Outlet, Navigate } from 'react-router-dom';
 import { SideNavAdmin } from '../../components/SideNavAdmin';
-import { Container } from './styles';
+import { Container, Main } from './styles';
 
 export function AdminLayout() {
 	const { admin: isAdmin } = JSON.parse(
@@ -10,11 +10,11 @@ export function AdminLayout() {
 	return isAdmin ? (
 		<Container>
 			<SideNavAdmin />
-			<main>
+			<Main>
 				<section>
 					<Outlet />
 				</section>
-			</main>
+			</Main>
 		</Container>
 	) : (
 		<Navigate to="/login" />
