@@ -11,10 +11,18 @@ import Typography from '@mui/material/Typography';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { useState } from 'react';
+import { formatDate } from '../../../utils/formatDate';
+import { ProductImage, SelectStatus } from './styles';
+import { orderStatusOptions } from './orderStatus';
+import { api } from '../../../services/api';
 
 export function Row(props) {
 	const { row } = props;
 	const [open, setOpen] = useState(false);
+
+	async function newStatusOrder(id, status) {
+		await api.put(`orders/${id}`, { status });
+	}
 
 	return (
 		<>
@@ -31,9 +39,18 @@ export function Row(props) {
 				<TableCell component="th" scope="row">
 					{row.orderId}
 				</TableCell>
-				<TableCell align="right">{row.name}</TableCell>
-				<TableCell align="right">{row.date}</TableCell>
-				<TableCell align="right">{row.status}</TableCell>
+				<TableCell>{row.name}</TableCell>
+				<TableCell>{formatDate(row.date)}</TableCell>
+				<TableCell>
+					<SelectStatus
+						options={orderStatusOptions.filter((status) => status.id !== 0)}
+						placeholder="Status"
+						defaultValue={orderStatusOptions.find(
+							(status) => status.value === row.status || null,
+						)}
+						onChange={(status) => newStatusOrder(row.orderId, status.value)}
+					/>
+				</TableCell>
 			</TableRow>
 			<TableRow>
 				<TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -48,8 +65,7 @@ export function Row(props) {
 										<TableCell>Quantidade</TableCell>
 										<TableCell>Produto</TableCell>
 										<TableCell>Categoria</TableCell>
-										{/* biome-ignore lint/style/useSelfClosingElements: <explanation> */}
-										<TableCell></TableCell>
+										<TableCell>Imagem do produto</TableCell>
 									</TableRow>
 								</TableHead>
 								<TableBody>
@@ -61,7 +77,7 @@ export function Row(props) {
 											<TableCell>{product.name}</TableCell>
 											<TableCell>{product.category}</TableCell>
 											<TableCell>
-												<img src={product.url} alt={product.name} />
+												<ProductImage src={product.url} alt={product.name} />
 											</TableCell>
 										</TableRow>
 									))}
