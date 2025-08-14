@@ -16,12 +16,31 @@ import {
 	ErrorMessage,
 } from './styles';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 const schema = yup.object({
-	name: yup.string().required(),
-	price: yup.number().positive().required(),
-	category: yup.object().required(),
-	file: yup.mixed(),
+	name: yup.string().required('Digite o nome do produto'),
+	price: yup
+		.number()
+		.positive()
+		.required('Digite o preço do produto')
+		.typeError('Digite um número válido'),
+	category: yup.object().required('Selecione uma categoria'),
+	file: yup
+		.mixed()
+		.test('required', 'Escolha um arquivo para continuar', (value) => {
+			return value && value.length > 0;
+		})
+		.test('fileSize', 'Carregue arquivos até 3mb', (value) => {
+			return value && value.length > 0 && value[0].size <= 3 * 1024 * 1024;
+		})
+		.test('type', 'Apenas arquivos PNG e JPEG são permitidos', (value) => {
+			return (
+				value &&
+				value.length > 0 &&
+				(value[0].type === 'image/png' || value[0].type === 'image/jpeg')
+			);
+		}),
 });
 
 export function NewProduct() {
@@ -46,8 +65,19 @@ export function NewProduct() {
 	} = useForm({
 		resolver: yupResolver(schema),
 	});
-	const onSubmit = (data) => {
-		console.log(data);
+	const onSubmit = async (data) => {
+		const productFormData = new FormData();
+
+		productFormData.append('name', data.name);
+		productFormData.append('price', Math.round(Number(data.price) * 100));
+		productFormData.append('category_id', data.category.id);
+		productFormData.append('file', data.file[0]);
+
+		await toast.promise(api.post('/products', productFormData), {
+			pending: 'Adicionando produto...',
+			success: 'Produto adicionado com sucesso!',
+			error: 'Erro ao adicionar produto, tente novamente',
+		});
 	};
 
 	return (
@@ -80,6 +110,8 @@ export function NewProduct() {
 
 						{fileName || 'Upload do produto'}
 					</LabelUpload>
+
+					<ErrorMessage>{errors?.file?.message}</ErrorMessage>
 				</InputGroup>
 
 				<InputGroup>
@@ -87,7 +119,7 @@ export function NewProduct() {
 					<Controller
 						name="category"
 						control={control}
-						render={(field) => (
+						render={({ field }) => (
 							<Select
 								{...field}
 								options={categories}
@@ -98,6 +130,8 @@ export function NewProduct() {
 							/>
 						)}
 					/>
+
+					<ErrorMessage>{errors?.category?.message}</ErrorMessage>
 				</InputGroup>
 
 				<SubmitButton>Adicionar produto</SubmitButton>
