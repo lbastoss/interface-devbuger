@@ -97,10 +97,10 @@ export function Orders() {
 					<TableHead>
 						<TableRow>
 							<TableCell />
-							<TableCell>Pedido</TableCell>
-							<TableCell>Cliente</TableCell>
-							<TableCell>Data do pedido</TableCell>
-							<TableCell>Status</TableCell>
+							<TableCell>PEDIDO</TableCell>
+							<TableCell>CLIENTE</TableCell>
+							<TableCell>DATA DO PEDIDO</TableCell>
+							<TableCell>STATUS</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>

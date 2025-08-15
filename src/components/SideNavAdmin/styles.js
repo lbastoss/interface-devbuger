@@ -7,6 +7,7 @@ export const Container = styled.nav`
     width: 100%;
     height: 100vh;
     background-color: ${(props) => props.theme.black};
+    
 
     img {
         width: 60%;

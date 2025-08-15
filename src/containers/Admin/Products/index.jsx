@@ -1,10 +1,22 @@
-import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+	[`&.${tableCellClasses.head}`]: {
+		backgroundColor: theme.palette.common.black,
+		color: theme.palette.common.white,
+	},
+	[`&.${tableCellClasses.body}`]: {
+		fontSize: 14,
+	},
+}));
+
 import { useEffect, useState } from 'react';
 import { formatPrice } from '../../../utils/formatPrice';
 import { useNavigate } from 'react-router-dom';
@@ -53,11 +65,15 @@ export function Products() {
 				<Table sx={{ minWidth: 650 }} aria-label="simple table">
 					<TableHead>
 						<TableRow>
-							<TableCell>Nome</TableCell>
-							<TableCell align="center">Preço</TableCell>
-							<TableCell align="center">Produto em oferta</TableCell>
-							<TableCell align="center">Imagem do produto</TableCell>
-							<TableCell align="center">Editar produto</TableCell>
+							<StyledTableCell>Nome</StyledTableCell>
+							<StyledTableCell align="center">Preço</StyledTableCell>
+							<StyledTableCell align="center">
+								Produto em oferta
+							</StyledTableCell>
+							<StyledTableCell align="center">
+								Imagem do produto
+							</StyledTableCell>
+							<StyledTableCell align="center">Editar produto</StyledTableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
