@@ -1,11 +1,11 @@
-import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material/styles';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {
@@ -18,13 +18,13 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 import { useEffect, useState } from 'react';
-import { formatPrice } from '../../../utils/formatPrice';
 import { useNavigate } from 'react-router-dom';
+import { formatPrice } from '../../../utils/formatPrice';
 
 import { api } from '../../../services/api';
 
-import { Container, ProductImage, EditButton } from './styles';
 import { CheckIcon, PencilIcon, XCircleIcon } from '@phosphor-icons/react';
+import { Container, EditButton, ProductImage } from './styles';
 
 export function Products() {
 	const [products, setProducts] = useState([]);

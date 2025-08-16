@@ -1,15 +1,15 @@
 import {
 	PaymentElement,
-	useStripe,
 	useElements,
+	useStripe,
 } from '@stripe/react-stripe-js';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import '../styles.css';
+import { toast } from 'react-toastify';
 import { useCart } from '../../../hooks/CartContext';
 import { api } from '../../../services/api';
-import { toast } from 'react-toastify';
 
 export function CheckoutForm() {
 	const { cartProducts, clearCart } = useCart();

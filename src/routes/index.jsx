@@ -13,8 +13,8 @@ import {
 	Register,
 } from '../containers';
 
-import { UserLayout } from '../layouts/UserLayout';
 import { AdminLayout } from '../layouts/AdminLayout';
+import { UserLayout } from '../layouts/UserLayout';
 
 export function Router() {
 	return (

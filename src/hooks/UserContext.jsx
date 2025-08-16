@@ -1,9 +1,9 @@
 import {
 	createContext,
 	useContext,
-	useState,
 	useEffect,
 	useLayoutEffect,
+	useState,
 } from 'react';
 
 const UserContext = createContext({});

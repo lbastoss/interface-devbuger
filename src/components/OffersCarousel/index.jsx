@@ -5,64 +5,64 @@ import 'react-multi-carousel/lib/styles.css';
 
 import { api } from '../../services/api';
 
-import { Container, Title } from './styles';
-import { CardProduct } from '../CardProduct';
 import { formatPrice } from '../../utils/formatPrice';
+import { CardProduct } from '../CardProduct';
+import { Container, Title } from './styles';
 
 export function OffersCarousel() {
-  const [offers, setOffers] = useState([]);
+	const [offers, setOffers] = useState([]);
 
-  useEffect(() => {
-    async function loadProducts() {
-      const { data } = await api.get('/products');
+	useEffect(() => {
+		async function loadProducts() {
+			const { data } = await api.get('/products');
 
-      const onlyOffers = data
-        .filter((product) => product.offer)
-        .map((product) => ({
-          currencyValue: formatPrice(product.price),
-          ...product,
-        }));
+			const onlyOffers = data
+				.filter((product) => product.offer)
+				.map((product) => ({
+					currencyValue: formatPrice(product.price),
+					...product,
+				}));
 
-      setOffers(onlyOffers);
-    }
+			setOffers(onlyOffers);
+		}
 
-    loadProducts();
-  }, []);
+		loadProducts();
+	}, []);
 
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1280 },
-      items: 4,
-    },
-    tablet: {
-      breakpoint: { max: 1280, min: 690 },
-      items: 3,
-    },
-    mobile: {
-      breakpoint: { max: 690, min: 0 },
-      items: 2,
-    },
-  };
+	const responsive = {
+		superLargeDesktop: {
+			// the naming can be any, depends on you.
+			breakpoint: { max: 4000, min: 3000 },
+			items: 5,
+		},
+		desktop: {
+			breakpoint: { max: 3000, min: 1280 },
+			items: 4,
+		},
+		tablet: {
+			breakpoint: { max: 1280, min: 690 },
+			items: 3,
+		},
+		mobile: {
+			breakpoint: { max: 690, min: 0 },
+			items: 2,
+		},
+	};
 
-  return (
-    <Container>
-      <Title>Ofertas do dia</Title>
+	return (
+		<Container>
+			<Title>Ofertas do dia</Title>
 
-      <Carousel
-        responsive={responsive}
-        infinite={true}
-        partialVisible={false}
-        itemClass="carousel-item"
-      >
-        {offers.map((product) => (
-          <CardProduct key={product.id} product={product} />
-        ))}
-      </Carousel>
-    </Container>
-  );
+			<Carousel
+				responsive={responsive}
+				infinite={true}
+				partialVisible={false}
+				itemClass="carousel-item"
+			>
+				{offers.map((product) => (
+					<CardProduct key={product.id} product={product} />
+				))}
+			</Carousel>
+		</Container>
+	);
 }

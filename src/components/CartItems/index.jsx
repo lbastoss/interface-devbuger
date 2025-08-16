@@ -1,3 +1,4 @@
+import TrashIcon from '../../assets/trash.svg';
 import { useCart } from '../../hooks/CartContext';
 import { formatPrice } from '../../utils/formatPrice';
 import { Table } from '../index';
@@ -8,7 +9,6 @@ import {
 	TotalPrice,
 	TrashImage,
 } from './styles';
-import TrashIcon from '../../assets/trash.svg';
 
 export function CartItems() {
 	const { cartProducts, decreaseProduct, increaseProduct, deleteProduct } =

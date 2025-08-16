@@ -1,22 +1,22 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import { toast } from 'react-toastify';
+import * as yup from 'yup';
 
+import Logo from '../../assets/Logo.svg';
+import { Button } from '../../components/Button';
+import { UseUser } from '../../hooks/UserContext';
 import { api } from '../../services/api';
 import {
 	Container,
 	Form,
 	InputContainer,
 	LeftContainer,
+	Link,
 	RightContainer,
 	Tittle,
-	Link,
 } from './styles';
-import Logo from '../../assets/Logo.svg';
-import { Button } from '../../components/Button';
-import { UseUser } from '../../hooks/UserContext';
 
 export function Login() {
 	const navigate = useNavigate();

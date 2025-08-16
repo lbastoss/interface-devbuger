@@ -1,16 +1,16 @@
+import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 
-import { api } from '../../../services/api';
-import { Row } from './row';
 import { useEffect, useState } from 'react';
-import { Filter, FilterOption } from './styles';
+import { api } from '../../../services/api';
 import { orderStatusOptions } from './orderStatus';
+import { Row } from './row';
+import { Filter, FilterOption } from './styles';
 
 export function Orders() {
 	const [orders, setOrders] = useState([]); // vai ficar como backup

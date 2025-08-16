@@ -1,4 +1,5 @@
-import PropTypes from 'prop-types';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -8,13 +9,12 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { formatDate } from '../../../utils/formatDate';
-import { ProductImage, SelectStatus } from './styles';
-import { orderStatusOptions } from './orderStatus';
 import { api } from '../../../services/api';
+import { formatDate } from '../../../utils/formatDate';
+import { orderStatusOptions } from './orderStatus';
+import { ProductImage, SelectStatus } from './styles';
 
 export function Row({ row, setOrders, orders }) {
 	const [open, setOpen] = useState(false);

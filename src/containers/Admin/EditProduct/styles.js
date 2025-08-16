@@ -85,4 +85,7 @@ export const ContainerCheckBox = styled.div`
 
     input {
         cursor: pointer;
-    } `;
+    }
+    
+
+`;

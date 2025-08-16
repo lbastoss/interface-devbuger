@@ -1,6 +1,6 @@
 import Logo from '../../assets/logo.svg';
 import { CartItems, CartResume } from '../../components';
-import { Container, Banner, Title, Content } from './styles';
+import { Banner, Container, Content, Title } from './styles';
 
 export function Cart() {
 	return (

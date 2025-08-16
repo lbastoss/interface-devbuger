@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import BannerHamburger from '../../assets/banner-hamburguer.svg';
-import Background from '../../assets/background.svg';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import Background from '../../assets/background.svg';
+import BannerHamburger from '../../assets/banner-hamburguer.svg';
 
 export const Container = styled.div`
     width: 100%;

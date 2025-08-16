@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import { useStripe } from '@stripe/react-stripe-js';
+import { useEffect, useState } from 'react';
 import '../../components/Stripe/styles.css';
 
 const SuccessIcon = (

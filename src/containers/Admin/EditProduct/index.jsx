@@ -1,7 +1,167 @@
+import { yupResolver } from '@hookform/resolvers/yup';
+import { ImageIcon } from '@phosphor-icons/react';
+import { useEffect, useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import * as yup from 'yup';
+
+import { api } from '../../../services/api';
+import {
+	Container,
+	ContainerCheckBox,
+	ErrorMessage,
+	Form,
+	Input,
+	InputGroup,
+	Label,
+	LabelUpload,
+	Select,
+	SubmitButton,
+} from './styles';
+
+const schema = yup.object({
+	name: yup.string().required('Digite o nome do produto'),
+	price: yup
+		.number()
+		.transform((value, originalValue) =>
+			String(originalValue).trim() === '' ? null : Number(originalValue),
+		)
+		.positive('Digite um valor positivo')
+		.required('Digite o preço do produto')
+		.typeError('Digite um número válido'),
+	category: yup.object().required('Selecione uma categoria'),
+	offer: yup.bool(),
+	file: yup
+		.mixed()
+		.test('fileSize', 'A imagem deve ter no máximo 3MB', (value) => {
+			if (!value?.[0]) return true; // se não selecionar arquivo, não valida
+			return value[0].size <= 3 * 1024 * 1024;
+		}),
+});
+
 export function EditProduct() {
+	const [fileName, setFileName] = useState(null);
+	const [categories, setCategories] = useState([]);
+
+	const navigate = useNavigate();
+
+	const {
+		state: { product },
+	} = useLocation();
+
+	useEffect(() => {
+		async function loadCategories() {
+			const { data } = await api.get('/categories');
+			setCategories(data);
+		}
+		loadCategories();
+	}, []);
+
+	const {
+		register,
+		handleSubmit,
+		control,
+		formState: { errors },
+	} = useForm({
+		resolver: yupResolver(schema),
+	});
+
+	const onSubmit = async (data) => {
+		const productFormData = new FormData();
+
+		productFormData.append('name', data.name);
+		productFormData.append('price', Math.round(Number(data.price) * 100));
+		productFormData.append('category_id', data.category.id);
+		productFormData.append('file', data.file[0]);
+		productFormData.append('offer', data.offer);
+
+		await toast.promise(api.put(`/products/${product.id}`, productFormData), {
+			pending: 'Editando produto...',
+			success: 'Produto editado com sucesso!',
+			error: 'Erro ao editar produto, tente novamente',
+		});
+
+		setTimeout(() => {
+			navigate('/admin/produtos');
+		}, 2000);
+	};
+
 	return (
-		<div>
-			<h2>Editar Produto</h2>
-		</div>
+		<Container>
+			<Form onSubmit={handleSubmit(onSubmit)}>
+				<InputGroup>
+					<Label>Nome</Label>
+					<Input
+						type="text"
+						{...register('name')}
+						defaultValue={product.name}
+					/>
+					<ErrorMessage>{errors?.name?.message}</ErrorMessage>
+				</InputGroup>
+
+				<InputGroup>
+					<Label>Preço</Label>
+					<Input
+						type="number"
+						step="0.01"
+						{...register('price')}
+						defaultValue={product.price / 100}
+					/>
+					<ErrorMessage>{errors?.price?.message}</ErrorMessage>
+				</InputGroup>
+
+				<InputGroup>
+					<LabelUpload>
+						<ImageIcon />
+						<input
+							type="file"
+							{...register('file')}
+							accept="image/png, image/jpeg"
+							onChange={(e) => {
+								setFileName(e.target.files[0]?.name);
+								register('file').onChange(e);
+							}}
+						/>
+						{fileName || 'Upload do produto'}
+					</LabelUpload>
+					<ErrorMessage>{errors?.file?.message}</ErrorMessage>
+				</InputGroup>
+
+				<InputGroup>
+					<Label>Categoria</Label>
+					<Controller
+						name="category"
+						control={control}
+						defaultValue={product.category}
+						render={({ field }) => (
+							<Select
+								{...field}
+								options={categories}
+								getOptionLabel={(category) => category.name}
+								getOptionValue={(category) => category.id}
+								placeholder="Selecione uma categoria"
+								menuPortalTarget={document.body}
+								defaultValue={product.category}
+							/>
+						)}
+					/>
+					<ErrorMessage>{errors?.category?.message}</ErrorMessage>
+				</InputGroup>
+
+				<InputGroup>
+					<ContainerCheckBox>
+						<input
+							type="checkbox"
+							defaultChecked={product.offer}
+							{...register('offer')}
+						/>
+						<Label>Produto em oferta?</Label>
+					</ContainerCheckBox>
+				</InputGroup>
+
+				<SubmitButton>Editar produto</SubmitButton>
+			</Form>
+		</Container>
 	);
 }
