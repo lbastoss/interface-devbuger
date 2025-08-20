@@ -104,14 +104,6 @@ export function Menu() {
 						{category.name}
 					</CategoryButton>
 				))}
-
-				<ContainerButton
-					onClick={() => {
-						navigate('/');
-					}}
-				>
-					<StyledImage src={ImgHome} alt="logoretorno" />
-				</ContainerButton>
 			</CategoryMenu>
 
 			<ProductsContainer>
@@ -119,6 +111,15 @@ export function Menu() {
 					<CardProduct product={product} key={product.id} />
 				))}
 			</ProductsContainer>
+
+			<ContainerButton
+				onClick={() => {
+					navigate('/');
+				}}
+			>
+				<StyledImage src={ImgHome} alt="logoretorno" />
+				<span>Voltar para a Home</span>
+			</ContainerButton>
 		</Container>
 	);
 }

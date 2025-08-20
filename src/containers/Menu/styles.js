@@ -81,15 +81,20 @@ export const ProductsContainer = styled.div`
 `;
 
 export const ContainerButton = styled.button`
-    background: ${(props) => props.theme.purple};
-    width: 42px;
-    height: 42px;
-    border: none;
-    border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: translateX(140px);
+    position: relative;
+    left: 100px;
+    top: -20px;
+    border-radius: 5px;
+    width: 150px;
+    height: 60px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+
 
   &:hover {
     background-color: ${(props) => props.theme.secondDarkPurple};

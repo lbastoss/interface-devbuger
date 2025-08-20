@@ -13,5 +13,9 @@ export const ContainerButton = styled.button`
         background-color: ${(props) => props.theme.secondDarkPurple};
     }
 
+    &:active {
+        background-color: ${(props) => props.theme.darkPurple};
+    }
+
 
 `;

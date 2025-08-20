@@ -5,14 +5,22 @@ import Logo from '../../assets/logo.svg';
 import { UseUser } from '../../hooks/UserContext';
 import { navLinks } from './navLinks';
 import { Container, Footer, NavLink, NavLinkContainer } from './styles';
+import { useNavigate } from 'react-router-dom';
 
 export function SideNavAdmin() {
 	const { logout } = UseUser();
 	const { pathname } = useResolvedPath();
 
+	const navigate = useNavigate();
+
 	return (
 		<Container>
-			<img src={Logo} alt="Hamburguer logo DevBurger" />
+			{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
+			<img
+				onClick={() => navigate('/')}
+				src={Logo}
+				alt="Hamburguer logo DevBurger"
+			/>
 			<NavLinkContainer>
 				{navLinks.map((link) => (
 					<NavLink

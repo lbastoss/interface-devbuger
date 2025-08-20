@@ -13,6 +13,7 @@ export const Container = styled.nav`
         width: 60%;
         margin: 40px 0;
         align-self: center;
+        cursor: pointer;
     }
 `;
 
